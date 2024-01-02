@@ -1,3 +1,6 @@
+from mido import Message as MidoMessage
+
+
 class Message:
     def __init__(self, channel, data1, data2, message):
         self.channel = channel
@@ -18,6 +21,13 @@ class Message:
         number = self.convert_midi_values_to_number(midi_values)
         
         return number
+    
+    @property
+    def mido(self):
+        return MidoMessage.from_bytes([self.message, self.data1, self.data2])
+    
+    def __repr__(self):
+        return f"Message(channel={self.channel}, data1={self.data1}, data2={self.data2}, message={self.message})"
     
     @staticmethod
     def extract_midi_values_from_number(number):
@@ -46,10 +56,11 @@ class Message:
         return number
     
 if __name__ == "__main__":
-    message1 = Message(channel=100, data1=2, data2=3, message=4)
+    messages =[
+        Message.from_raw_message(84381697),
+        Message.from_raw_message(84381697),
+        Message.from_raw_message(495617),   
+    ]
     
-    print(message1.raw)
-    
-    message2 = Message.from_raw_message(message1.raw)
-    
-    print(message2.raw)
+    for message in messages:    
+        print(f"{message.raw} | {message}")
