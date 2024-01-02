@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MidiSettings>
+  <RuleSet Name="New RuleSet">
+    <Rule Name="Fader 1" UseBacktrack="false" SliderMessage="3190785" MinimumBacktrack="3190785" MaximumBacktrack="2133897217">
+      <Type>Lumos.GUI.MIDI.SliderRule</Type>
+    </Rule>
+    <Rule Name="1:1" UseBacktrack="true" SliderMessage="3706881" MinimumBacktrack="3706881" MaximumBacktrack="2134413313">
+      <Type>Lumos.GUI.MIDI.SliderRule</Type>
+    </Rule>
+    <Rule Name="Fader 2" UseBacktrack="false" SliderMessage="3256321" MinimumBacktrack="3256321" MaximumBacktrack="2133962753">
+      <Type>Lumos.GUI.MIDI.SliderRule</Type>
+    </Rule>
+    <Rule Name="Stop All" UseBacktrack="true" SliderMessage="5869569" MinimumBacktrack="5869569" MaximumBacktrack="2136576001">
+      <Type>Lumos.GUI.MIDI.SliderRule</Type>
+    </Rule>
+    <Rule Name="BTN2" UseBacktrack="true" SliderMessage="5804033" MinimumBacktrack="5804033" MaximumBacktrack="2136510465">
+      <Type>Lumos.GUI.MIDI.SliderRule</Type>
+    </Rule>
+    <Rule Name="SHIFT" UseBacktrack="false" Threshold="126" IsToggle="false" EnableMessage="2137165825" EnabledBacktrack="2137165825" DisableMessage="2137161729" DisabledBacktrack="0">
+      <Type>Lumos.GUI.MIDI.ButtonRule</Type>
+    </Rule>
+    <Rule Name="1:2" UseBacktrack="true" SliderMessage="3772417" MinimumBacktrack="3772417" MaximumBacktrack="2134478849">
+      <Type>Lumos.GUI.MIDI.SliderRule</Type>
+    </Rule>
+    <Rule Name="2:1" UseBacktrack="true" SliderMessage="3182593" MinimumBacktrack="3182593" MaximumBacktrack="2133889025">
+      <Type>Lumos.GUI.MIDI.SliderRule</Type>
+    </Rule>
+    <Rule Name="8:1" UseBacktrack="true" SliderMessage="36865" MinimumBacktrack="36865" MaximumBacktrack="2130743297">
+      <Type>Lumos.GUI.MIDI.SliderRule</Type>
+    </Rule>
+    <Rule Name="1:8" UseBacktrack="true" SliderMessage="4165633" MinimumBacktrack="4165633" MaximumBacktrack="2134872065">
+      <Type>Lumos.GUI.MIDI.SliderRule</Type>
+    </Rule>
+    <Rule Name="SHIFT" UseBacktrack="true" Threshold="0" IsToggle="false" EnableMessage="0" EnabledBacktrack="0" DisableMessage="0" DisabledBacktrack="0">
+      <Type>Lumos.GUI.MIDI.ButtonRule</Type>
+    </Rule>
+    <Rule Name="&lt; 1:1" UseBacktrack="true" Threshold="126" IsToggle="false" EnableMessage="2134413313" EnabledBacktrack="2134413313" DisableMessage="3706881" DisabledBacktrack="3706881">
+      <Type>Lumos.GUI.MIDI.ButtonRule</Type>
+    </Rule>
+    <Rule Name="&lt; 8:8" UseBacktrack="true" Threshold="126" IsToggle="false" EnableMessage="84381697" EnabledBacktrack="84381697" DisableMessage="0" DisabledBacktrack="495617">
+      <Type>Lumos.GUI.MIDI.ButtonRule</Type>
+    </Rule>
+    <Rule Name="1_green" UseBacktrack="true" Threshold="0" IsToggle="false" EnableMessage="2134867969" EnabledBacktrack="2134867969" DisableMessage="4161537" DisabledBacktrack="4161537">
+      <Type>Lumos.GUI.MIDI.ButtonRule</Type>
+    </Rule>
+    <Rule Name="UP" UseBacktrack="false" Threshold="126" IsToggle="false" EnableMessage="2134937601" EnabledBacktrack="2134937601" DisableMessage="4227073" DisabledBacktrack="4227073">
+      <Type>Lumos.GUI.MIDI.ButtonRule</Type>
+    </Rule>
+    <Rule Name="DOWN" UseBacktrack="false" Threshold="126" IsToggle="false" EnableMessage="2135003137" EnabledBacktrack="2135003137" DisableMessage="2134999041" DisabledBacktrack="2134999041">
+      <Type>Lumos.GUI.MIDI.ButtonRule</Type>
+    </Rule>
+    <Rule Name="LEFT" UseBacktrack="false" Threshold="126" IsToggle="false" EnableMessage="2135068673" EnabledBacktrack="2135068673" DisableMessage="2135064577" DisabledBacktrack="2135064577">
+      <Type>Lumos.GUI.MIDI.ButtonRule</Type>
+    </Rule>
+    <Rule Name="RIGHT" UseBacktrack="false" Threshold="126" IsToggle="false" EnableMessage="2135134209" EnabledBacktrack="2135134209" DisableMessage="2135130113" DisabledBacktrack="2135130113">
+      <Type>Lumos.GUI.MIDI.ButtonRule</Type>
+    </Rule>
+  </RuleSet>
+</MidiSettings>
