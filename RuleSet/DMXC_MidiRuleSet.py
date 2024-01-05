@@ -9,6 +9,9 @@ class MidiRuleSet:
 
     def add_rule(self, rule):
         self.rules.append(rule)
+        
+    def add_rules(self, rules:list):
+        self.rules.extend(rules)
 
     def to_xml_element(self):
         ruleset_element = ET.Element("RuleSet", Name=self.name)
@@ -18,8 +21,3 @@ class MidiRuleSet:
 
         return ruleset_element
 
-    def to_pretty_xml_string(self):
-        ruleset_element = self.to_xml_element()
-        xml_string = ET.tostring(ruleset_element, encoding="utf-8").decode("utf-8")
-        pretty_xml = minidom.parseString(xml_string).toprettyxml(indent="  ")
-        return pretty_xml

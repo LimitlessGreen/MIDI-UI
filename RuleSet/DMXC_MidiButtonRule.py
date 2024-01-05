@@ -1,9 +1,9 @@
-from . import MidiRuleBase, Message
+from . import MidiRuleBase
 import xml.etree.ElementTree as ET
 
 class MidiButtonRule(MidiRuleBase):
-    def __init__(self, name, use_backtrack, threshold, is_toggle, enable_message:Message, enabled_backtrack:Message,
-                 disable_message:Message, disabled_backtrack:Message):
+    def __init__(self, name, use_backtrack, threshold, is_toggle, enable_message:int, enabled_backtrack:int,
+                 disable_message:int, disabled_backtrack:int):
         self.name = name
         self.use_backtrack = use_backtrack
         self.threshold = threshold
@@ -16,8 +16,8 @@ class MidiButtonRule(MidiRuleBase):
     def to_xml_element(self):
         rule_element = ET.Element("Rule", Name=self.name, UseBacktrack=str(self.use_backtrack).lower(),
                                   Threshold=str(self.threshold), IsToggle=str(self.is_toggle).lower(),
-                                  EnableMessage=str(self.enable_message.raw), EnabledBacktrack=str(self.enabled_backtrack.raw),
-                                  DisableMessage=str(self.disable_message.raw), DisabledBacktrack=str(self.disabled_backtrack.raw))
+                                  EnableMessage=str(self.enable_message), EnabledBacktrack=str(self.enabled_backtrack),
+                                  DisableMessage=str(self.disable_message), DisabledBacktrack=str(self.disabled_backtrack))
 
         type_element = ET.SubElement(rule_element, "Type")
         type_element.text = "Lumos.GUI.MIDI.ButtonRule"
