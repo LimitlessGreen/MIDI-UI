@@ -8,4 +8,6 @@ from .Message import Message
 from .MatrixMapping import map_1d_to_2d, map_2d_to_1d
 from .MidiButton import MidiButton
 from .MidiColors import MidiColors
-from .ButtonGrid import ButtonGrid, Orientations
+from .ButtonGrid import ButtonGrid, GridOrientations
+from .MidiSlider import MidiSliderRule
+from .SliderBar import SliderBar, BarOrientations

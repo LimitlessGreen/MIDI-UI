@@ -124,3 +124,11 @@ converted_dict = midi_converter.convert_midi_values_to_dict(midi_values_example)
 
 # Gib das Ergebnis aus
 print("Converted Dictionary:", converted_dict)
+
+
+###
+
+# Raw MIDI-Werte
+midi_number = 16814081
+midi_converter.extract_midi_values_from_number(midi_number)
+print(midi_converter.extract_midi_values_from_number(midi_number))

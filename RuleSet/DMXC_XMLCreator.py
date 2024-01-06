@@ -1,5 +1,6 @@
 from xml.dom import minidom
 import xml.etree.ElementTree as ET
+import os
 
 class XMLCreator:
     def __init__(self):
@@ -23,3 +24,8 @@ class XMLCreator:
         xml_string = ET.tostring(midisettings_element, encoding="utf-8").decode("utf-8")
         pretty_xml = minidom.parseString(xml_string).toprettyxml(indent="  ")
         return pretty_xml
+    
+    def save(self, path):
+        path = os.path.abspath(path)
+        with open(path, 'w') as f:
+            f.write(self.to_pretty_xml_string())

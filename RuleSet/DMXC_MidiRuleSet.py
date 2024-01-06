@@ -8,9 +8,13 @@ class MidiRuleSet:
         self.rules = []
 
     def add_rule(self, rule):
+        if rule is None:
+            return
         self.rules.append(rule)
         
     def add_rules(self, rules:list):
+        if rules is None:
+            return
         self.rules.extend(rules)
 
     def to_xml_element(self):

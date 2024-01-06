@@ -31,26 +31,17 @@ class MidiButton:
         output = []
         
         if self.color is None:
-            rule = MidiButtonRule(name=f"{self.name}", 
-                                  use_backtrack=False, 
-                                  threshold=127, 
-                                  is_toggle=is_toggle, 
-                                  enable_message=self.msg_press.raw, 
-                                  enabled_backtrack=0, 
-                                  disable_message=self.msg_release.raw, 
-                                  disabled_backtrack=0)
-            output.append(rule)
-            return output
+            return None
         
-        for color, address in self.color.items():
+        for color in self.color:
             if color == 'off': continue
             rule = MidiButtonRule(name=f"{self.name}_{color}", 
                                   use_backtrack=True, 
-                                  threshold=127, 
+                                  threshold=126, 
                                   is_toggle=is_toggle, 
-                                  enable_message=0, 
+                                  enable_message=self.msg_color(color).raw, 
                                   enabled_backtrack=self.msg_color(color).raw, 
-                                  disable_message=0, 
+                                  disable_message=self.msg_color('off').raw, 
                                   disabled_backtrack=self.msg_color('off').raw)
             output.append(rule)
             
@@ -60,7 +51,7 @@ class MidiButton:
        
         rule = MidiButtonRule(name=f"{self.name}", 
                                 use_backtrack=False, 
-                                threshold=127, 
+                                threshold=126, 
                                 is_toggle=is_toggle, 
                                 enable_message=self.msg_press.raw, 
                                 enabled_backtrack=0, 

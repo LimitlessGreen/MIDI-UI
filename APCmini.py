@@ -12,12 +12,16 @@ from RuleSet import (
     Message,
     map_1d_to_2d,
     map_2d_to_1d,
-    Orientations
+    GridOrientations,
+    SliderBar,
+    BarOrientations
 )
 
 from mido import Message as Message
 import mido
 import time
+
+from rich import print
 
 class APCMatrix:
     pass
@@ -60,14 +64,14 @@ class APCmini:
             },
             'bar_right': {
                 'start': 82,
-                'end': 87,
+                'end': 89,
                 'channel': 0,
                 'colors': {
                     'off': 0,
                     'green': 1,
                     'green_blink': 2,
                 },
-                'names': ['stop', 'play', 'record', 'mute', 'select', 'custom1', 'custom2']
+                'names': ['stop_clip', 'play', 'record', 'mute', 'select', 'custom1', 'custom2', 'stop_all']
             },
             'shift': 98,
         }
@@ -89,13 +93,12 @@ class APCmini:
             end_address=self.board['grid']['end'],
             width=self.board['grid']['width'],
             colors=self.board['grid']['colors'],
-            orientation=Orientations[self.board['grid']['orientation']]
+            orientation=GridOrientations[self.board['grid']['orientation']]
         )
         
-        self.slider = MidiButton(
-            note=self.board['slider']['start'],
-            channel=self.board['slider']['channel'],
-            name='slider'
+        self.slider = SliderBar(
+            start_address=self.board['slider']['start'],
+            end_address=self.board['slider']['end'],
         )
         
         self.bar_down = [MidiButton(
@@ -131,7 +134,7 @@ class APCmini:
             rules_in.add_rule(button.get_input_rule(is_toggle=False))
             
         # Slider
-        pass
+        rules_out.add_rules(self.slider.get_output_rules())
     
         # Bar down
         for button in self.bar_down:
@@ -144,7 +147,7 @@ class APCmini:
             rules_in.add_rule(button.get_input_rule(is_toggle=False))
             
         # Shift
-        rules_out.add_rules(self.shift.get_output_rules(is_toggle=False))
+        rules_in.add_rule(self.shift.get_input_rule(is_toggle=False))
         
         return rules_out, rules_in
     
@@ -155,8 +158,8 @@ class APCmini:
         output_rules, input_rules = self._get_rule_set()
         
         xml = XMLCreator()
-        xml.add_rule_set(output_rules)
         xml.add_rule_set(input_rules)
+        xml.add_rule_set(output_rules)
         
         return xml
     
@@ -164,17 +167,14 @@ class APCmini:
         '''
         Export the rules to a file.
         '''
-        pass
+        self.get_dmxc_config().save(path)
     
-    
-    
-apc_mini = APCmini()
-print(apc_mini.get_dmxc_config().to_pretty_xml_string())
         
+
         
-        
-            
-            
+if __name__ == '__main__':
+    apc_mini = APCmini()
+    apc_mini.export_rules('apcmini.xml')
        
         
         

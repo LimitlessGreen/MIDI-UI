@@ -1,7 +1,7 @@
 from . import MidiButton
 from enum import Enum
 
-class Orientations(Enum):
+class GridOrientations(Enum):
     bottom_left_to_top_right = 0
     top_left_to_bottom_right = 1
     bottom_right_to_top_left = 2
@@ -9,42 +9,67 @@ class Orientations(Enum):
     
 
 class ButtonGrid:
-    def __init__(self, start_address:int, end_address:int, width:int, colors:dict, orientation:Orientations = Orientations.bottom_left_to_top_right):
+    def __init__(self, start_address:int, end_address:int, width:int, colors:dict, orientation:GridOrientations = GridOrientations.bottom_left_to_top_right):
         self.start_address = start_address
         self.end_address = end_address
+        self.total_elements = end_address - start_address + 1
         self.width = width
-        self.height = (end_address - start_address) // width
+        self.height = self.total_elements // width
         self.colors = colors
-        self.orientation = orientation
+        self._orientation = orientation
         self.buttons = self._create_buttons()
+        
+    @property
+    def orientation(self):
+        return self._orientation
+    
+    @orientation.setter
+    def orientation(self, orientation:GridOrientations):
+        '''
+        Set the orientation of the grid.
+        Not really needed, but it's nice to have for unittests.
+        '''
+        self._orientation = orientation
+        self.buttons = self._create_buttons()      
         
     def _create_buttons(self):
         '''
         Create a matrix of buttons, where (0,0) is top left.
         But respecting the original given orientation.
+        For example: The Function for a grid with bottom_left_to_top_right orientation would be:
+        index_1d = (height - 1 - row) * width + column
         '''
         buttons = []
         
-        if self.orientation == Orientations.bottom_left_to_top_right:
-            for y in range(self.height):
-                for x in range(self.width):
-                    buttons.append(MidiButton(note=self.start_address + x + (y * self.width), color=self.colors, name=f"B({x},{y})"))
-        elif self.orientation == Orientations.top_left_to_bottom_right:
-            for y in reversed(range(self.height)):
-                for x in range(self.width):
-                    buttons.append(MidiButton(note=self.start_address + x + (y * self.width), color=self.colors, name=f"B({x},{y})"))
-        elif self.orientation == Orientations.bottom_right_to_top_left:
-            for y in range(self.height):
-                for x in reversed(range(self.width)):
-                    buttons.append(MidiButton(note=self.start_address + x + (y * self.width), color=self.colors, name=f"B({x},{y})"))
-        elif self.orientation == Orientations.top_right_to_bottom_left:
-            for y in reversed(range(self.height)):
-                for x in reversed(range(self.width)):
-                    buttons.append(MidiButton(note=self.start_address + x + (y * self.width), color=self.colors, name=f"B({x},{y})"))
+        if self.orientation == GridOrientations.bottom_left_to_top_right:
+            mapping = lambda row, column: (self.height - 1 - row) * self.width + column
+        elif self.orientation == GridOrientations.top_left_to_bottom_right:
+            mapping = lambda row, column: row * self.width + column
+        elif self.orientation == GridOrientations.bottom_right_to_top_left:
+            mapping = lambda row, column: (self.height - 1 - row) * self.width + (self.width - 1 - column)
+        elif self.orientation == GridOrientations.top_right_to_bottom_left:
+            mapping = lambda row, column: row * self.width + (self.width - 1 - column)
         else:
-            raise ValueError(f"Orientation '{self.orientation}' not implemented")
-            
+            raise ValueError(f"Orientation '{self.orientation}' not found")
+        
+        for row in range(self.height):
+            for column in range(self.width):
+                index_1d = mapping(row, column)
+                address = self.start_address + index_1d
+                button = MidiButton(note=address, color=self.colors, name=f"B({row+1},{column+1})")
+                buttons.append(button)
+                
         return buttons
+                
+    @orientation.setter
+    def orientation(self, orientation:GridOrientations):
+        '''
+        Set the orientation of the grid.
+        Not really needed, but it's nice to have for unittests.
+        '''
+        self._orientation = orientation
+        self.buttons = self._create_buttons()      
+        
     
     def get_button(self, x: int, y: int) -> MidiButton:
         '''
