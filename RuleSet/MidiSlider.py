@@ -20,13 +20,13 @@ class MidiSlider:
         return Message('control_change', control=self.control, channel=self.channel, value=self.max_value)
         
 
-    def get_output_rules(self):
+    def get_input_rule(self):
         rule = MidiSliderRule(name=f"{self.name}", 
                               use_backtrack=False, 
                               slider_message=self.msg_max.raw, 
                               minimum_backtrack=self.msg_min.raw, 
                               maximum_backtrack=self.msg_max.raw)
-        return [rule]
+        return rule
 
     def __repr__(self):
         return f"MidiSlider(name={self.name}, control_change={self.control}, channel={self.channel}, min_value={self.min_value}, max_value={self.max_value})"

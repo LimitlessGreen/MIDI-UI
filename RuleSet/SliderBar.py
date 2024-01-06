@@ -54,8 +54,8 @@ class SliderBar:
             
         return sliders
     
-    def get_output_rules(self):
+    def get_input_rules(self):
         rules = []
         for slider in self.sliders:
-            rules += slider.get_output_rules()
+            rules.append(slider.get_input_rule())
         return rules

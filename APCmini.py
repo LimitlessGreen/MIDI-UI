@@ -134,7 +134,7 @@ class APCmini:
             rules_in.add_rule(button.get_input_rule(is_toggle=False))
             
         # Slider
-        rules_out.add_rules(self.slider.get_output_rules())
+        rules_in.add_rules(self.slider.get_input_rules())
     
         # Bar down
         for button in self.bar_down:
