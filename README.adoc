@@ -22,5 +22,5 @@ python APCmini.py
 
 image::doc/img/import.png[]
 image::doc/img/rules.png[]
-
+image::doc/img/in_out.png[]
 
