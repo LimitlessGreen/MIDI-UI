@@ -17,3 +17,10 @@ This project provides a Python script to generate an XML configuration file (`ap
 ```sh
 python APCmini.py
 ```
+
+== In DMX Control 3
+
+image::doc/img/import.png[]
+image::doc/img/rules.png[]
+
+
