@@ -49,7 +49,7 @@ class SliderBar:
         for column in range(self._total_elements):
             index_1d = mapping(column)
             address = self.start_address + index_1d
-            slider = MidiSlider(control=address, name=f"Fader({column+1})")
+            slider = MidiSlider(control=address, name=f"Fader {column+1}")
             sliders.append(slider)
             
         return sliders

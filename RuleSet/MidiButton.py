@@ -35,7 +35,7 @@ class MidiButton:
         
         for color in self.color:
             if color == 'off': continue
-            rule = MidiButtonRule(name=f"{self.name}_{color}", 
+            rule = MidiButtonRule(name=f"{self.name} {color}", 
                                   use_backtrack=True, 
                                   threshold=126, 
                                   is_toggle=is_toggle, 

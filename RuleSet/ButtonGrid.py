@@ -56,7 +56,7 @@ class ButtonGrid:
             for column in range(self.width):
                 index_1d = mapping(row, column)
                 address = self.start_address + index_1d
-                button = MidiButton(note=address, color=self.colors, name=f"B({row+1},{column+1})")
+                button = MidiButton(note=address, color=self.colors, name=f"Button {row+1},{column+1}")
                 buttons.append(button)
                 
         return buttons
